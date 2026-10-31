@@ -2,7 +2,7 @@
 
 ## 许可
 
-代码以 [Apache License 2.0](LICENSE) 发布，第三方素材见 [NOTICE](NOTICE)。
+代码以 [Apache License 2.0](LICENSE) 发布。
 
 **“智悲佛网”的名称和 Logo 不在开源许可范围内**，未经许可不得使用。
 
