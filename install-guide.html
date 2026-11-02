@@ -355,7 +355,7 @@
           if (!version) return Promise.reject();
           link.href = '/releases/zhibeifw-' + encodeURIComponent(version) + '.apk';
           ready = true;
-          info.textContent = '当前版本 v' + version;
+          info.textContent = '当前版本 v' + version + '，需要 Android 10 或以上';
           info.hidden = false;
           autoDownload();
         })
