@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>智悲佛网</title>
-  <meta name="description" content="智悲佛网官方网站：下载智悲佛网 App（iOS / Android），随时随地聆听法音、阅读法宝。">
+  <meta name="description" content="智悲佛网">
   <meta name="theme-color" content="#0d1a10">
   <meta property="og:type" content="website">
   <meta property="og:title" content="智悲佛网">
-  <meta property="og:description" content="下载智悲佛网 App，随时随地聆听法音、阅读法宝。">
+  <meta property="og:description" content="智悲佛网">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 
@@ -78,65 +78,69 @@
     }
 
     .download-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+      max-width: 420px;
     }
 
     .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      padding: 13px 26px;
-      min-width: 215px;
-      flex-shrink: 0;
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      gap: 5px;
+      padding: 3px 0;
+      border: 0;
+      background: none;
+      color: #ffffff;
+      font: inherit;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .download-btn:disabled {
+      opacity: 0.65;
+      cursor: default;
+    }
+
+    .download-btn:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .download-icon {
+      display: grid;
+      place-items: center;
+      width: clamp(46px, 13vw, 60px);
+      aspect-ratio: 1;
       background: rgba(255, 255, 255, 0.16);
       border: 1px solid rgba(255, 255, 255, 0.28);
       -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
-      border-radius: 12px;
-      color: #ffffff;
-      text-decoration: none;
+      border-radius: 50%;
       transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .download-btn:hover {
+    .download-btn:not(:disabled):hover .download-icon {
       background: rgba(255, 255, 255, 0.25);
       border-color: rgba(255, 255, 255, 0.45);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 
-    .download-btn .icon {
-      font-size: 2.1rem;
+    .download-icon .icon {
       width: 28px;
-      opacity: 0.95;
+      height: 28px;
     }
 
-    .btn-text {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .btn-text .small-text {
-      font-size: 0.7rem;
-      font-weight: 300;
-      opacity: 0.85;
-      line-height: 1.1;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .btn-text .big-text {
-      font-size: 1.02rem;
+    .download-label {
+      font-size: clamp(0.82rem, 3.6vw, 0.94rem);
       font-weight: 500;
       line-height: 1.25;
-      white-space: nowrap;
-      letter-spacing: 0.3px;
+      overflow-wrap: anywhere;
     }
 
     .hero-footer {
@@ -190,18 +194,6 @@
         gap: 20px;
       }
 
-      .download-group {
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .download-btn {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-      }
-
       .hero-footer {
         flex-direction: column;
         justify-content: center;
@@ -221,23 +213,35 @@
         <h1 class="site-main-title">智悲佛网</h1>
       </div>
 
-      <div class="download-group">
-        <a href="https://apps.apple.com/app/id6829302070" target="_blank" rel="noopener" class="download-btn">
-          <svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-          <div class="btn-text">
-            <span class="small-text">Download on the</span>
-            <span class="big-text">App Store</span>
-          </div>
+      <nav class="download-group" aria-label="获取智悲佛网">
+        <a href="https://apps.apple.com/app/id6829302070" class="download-btn" data-platform="apple">
+          <span class="download-icon">
+            <svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          </span>
+          <span class="download-label">Apple</span>
         </a>
 
-        <a href="install-guide.html" class="download-btn">
-          <svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/></svg>
-          <div class="btn-text">
-            <span class="small-text">Direct Download</span>
-            <span class="big-text">Android APK</span>
-          </div>
+        <a href="install-guide.html" class="download-btn" data-platform="android">
+          <span class="download-icon">
+            <svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/></svg>
+          </span>
+          <span class="download-label">Android</span>
         </a>
-      </div>
+
+        <button type="button" class="download-btn" data-platform="windows" disabled>
+          <span class="download-icon">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+          </span>
+          <span class="download-label">Windows</span>
+        </button>
+
+        <a href="https://web.zhibeifw.com/" class="download-btn" aria-label="网页版，直接听课">
+          <span class="download-icon">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M3 9h18" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M10 11.5v5l4-2.5z"/></svg>
+          </span>
+          <span class="download-label">网页版</span>
+        </a>
+      </nav>
     </div>
 
     <footer class="hero-footer">
@@ -249,5 +253,108 @@
     </footer>
   </main>
 
+  <dialog class="platform-dialog" id="platform-dialog" aria-labelledby="platform-title">
+    <div class="platform-dialog-header">
+      <h2 id="platform-title"></h2>
+      <form method="dialog">
+        <button class="platform-dialog-close" aria-label="关闭" autofocus><span aria-hidden="true">×</span></button>
+      </form>
+    </div>
+    <div class="platform-downloads" data-platform-options="apple" hidden>
+        <a href="https://apps.apple.com/app/id6829302070" target="_blank" rel="noopener" class="platform-download glass">
+          <svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span class="platform-download-text">
+            <strong>App Store</strong>
+            <small>iPhone、iPad、Mac、Apple&nbsp;Watch、Vision&nbsp;Pro</small>
+          </span>
+        </a>
+        <div class="platform-download glass" aria-disabled="true">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M2 19h20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          <span class="platform-download-text">
+            <strong>Mac 直接下载</strong>
+            <small>DMG 安装包 · 待发布</small>
+          </span>
+        </div>
+    </div>
+
+    <div class="platform-downloads" data-platform-options="android" hidden>
+        <div class="platform-download glass" aria-disabled="true">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3.8a1.2 1.2 0 0 1 1.8-1l15 8.2a1.2 1.2 0 0 1 0 2.1l-15 8.2a1.2 1.2 0 0 1-1.8-1z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4.8 3.2 12.1 12.1m-12.1 5.5L16.9 8.7" fill="none" stroke="currentColor" stroke-width="1.35"/></svg>
+          <span class="platform-download-text">
+            <strong>Google Play</strong>
+            <small>Android 商店版 · 待发布</small>
+          </span>
+        </div>
+        <a href="install-guide.html" id="android-download" class="platform-download glass">
+          <svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/></svg>
+          <span class="platform-download-text">
+            <strong>APK 直接下载</strong>
+            <small>手机、平板和 Android&nbsp;TV</small>
+          </span>
+        </a>
+    </div>
+
+    <div class="platform-downloads" data-platform-options="windows" hidden>
+        <div class="platform-download glass" aria-disabled="true">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="7" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M8 8V6a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" stroke-width="1.75"/><path d="M8 11h3.5v3.5H8zm4.5 0H16v3.5h-3.5zM8 15.5h3.5V19H8zm4.5 0H16V19h-3.5z"/></svg>
+          <span class="platform-download-text">
+            <strong>Microsoft Store</strong>
+            <small>Windows 商店版 · 待发布</small>
+          </span>
+        </div>
+        <div class="platform-download glass" aria-disabled="true">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+          <span class="platform-download-text">
+            <strong>EXE 直接下载</strong>
+            <small>EXE 安装包 · 待发布</small>
+          </span>
+        </div>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      const dialog = document.getElementById('platform-dialog');
+      if (typeof dialog.showModal !== 'function') return;
+
+      const title = document.getElementById('platform-title');
+      const groups = dialog.querySelectorAll('[data-platform-options]');
+      for (const trigger of document.querySelectorAll('[data-platform]')) {
+        trigger.setAttribute('aria-haspopup', 'dialog');
+        trigger.setAttribute('aria-controls', dialog.id);
+        if (trigger instanceof HTMLButtonElement) trigger.disabled = false;
+
+        trigger.addEventListener('click', event => {
+          event.preventDefault();
+          title.textContent = trigger.querySelector('.download-label').textContent;
+          for (const group of groups) group.hidden = group.dataset.platformOptions !== trigger.dataset.platform;
+          trigger.focus({ preventScroll: true });
+          dialog.showModal();
+        });
+      }
+
+      dialog.addEventListener('click', event => {
+        if (event.target === dialog && dialog.open) {
+          const { left, right, top, bottom } = dialog.getBoundingClientRect();
+          if (event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom) dialog.close();
+        }
+      });
+    })();
+
+    (function () {
+      const link = document.getElementById('android-download');
+      if (!window.fetch || /MicroMessenger|QQ\//i.test(navigator.userAgent)) return;
+
+      fetch('version.json', { cache: 'no-cache' })
+        .then(response => response.ok ? response.json() : null)
+        .then(data => {
+          const version = typeof data?.version === 'string' ? data.version.replace(/^v/i, '') : '';
+          if (!/^\d{4}\.\d{2}\.\d{2}$/.test(version)) return;
+          link.href = '/releases/zhibeifw-' + version + '.apk';
+          link.download = '';
+        })
+        .catch(() => {});
+    })();
+  </script>
 </body>
 </html>
