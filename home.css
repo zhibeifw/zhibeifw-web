@@ -868,6 +868,29 @@ body.home-page {
   text-underline-offset: 0.2em;
 }
 
+.home-contribute {
+  padding-block: var(--home-space);
+}
+
+.home-contribute h2 {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+}
+
+.home-contribute .home-heading p {
+  max-width: 36em;
+  text-wrap: balance;
+}
+
+.home-contribute .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 44px;
+  margin-top: 10px;
+  font-size: 1.0625rem;
+  white-space: normal;
+}
+
 .home-footer {
   background: #f5f5f7;
   color: rgb(0 0 0 / 0.56);
