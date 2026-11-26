@@ -285,7 +285,7 @@
             <small>Android 商店版 · 待发布</small>
           </span>
         </div>
-        <a href="install-guide.html" id="android-download" class="platform-download glass">
+        <a href="install-guide.html" class="platform-download glass">
           <svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M420.55,301.93a24,24,0,1,1,24-24,24,24,0,0,1-24,24m-265.1,0a24,24,0,1,1,24-24,24,24,0,0,1-24,24m273.7-144.48,47.94-83a10,10,0,1,0-17.27-10h0l-48.54,84.07a301.25,301.25,0,0,0-246.56,0L116.18,64.45a10,10,0,1,0-17.27,10h0l47.94,83C64.53,202.22,8.24,285.55,0,384H576c-8.24-98.45-64.54-181.78-146.85-226.55"/></svg>
           <span class="platform-download-text">
             <strong>APK 直接下载</strong>
@@ -347,21 +347,6 @@
           if (event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom) dialog.close();
         }
       });
-    })();
-
-    (function () {
-      const link = document.getElementById('android-download');
-      if (!window.fetch || /MicroMessenger|QQ\//i.test(navigator.userAgent)) return;
-
-      fetch('version.json', { cache: 'no-cache' })
-        .then(response => response.ok ? response.json() : null)
-        .then(data => {
-          const version = typeof data?.version === 'string' ? data.version.replace(/^v/i, '') : '';
-          if (!/^\d{4}\.\d{2}\.\d{2}$/.test(version)) return;
-          link.href = '/releases/zhibeifw-' + version + '.apk';
-          link.download = '';
-        })
-        .catch(() => {});
     })();
   </script>
 </body>
