@@ -1,3 +1,8 @@
 {
-  "version": "2026.11.23"
+  "version": "2026.11.23",
+  "downloads": {
+    "mac": "/mac/zhibeifw-2026.11.23.dmg",
+    "windows": "/windows/zhibeifw-2026.11.23-win-setup.exe",
+    "android": "/android/zhibeifw-2026.11.23.apk"
+  }
 }
