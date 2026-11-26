@@ -6,7 +6,7 @@ function centerPhoneStrip() {
 }
 
 centerPhoneStrip();
-narrowViewport.addEventListener('change', centerPhoneStrip);
+new ResizeObserver(centerPhoneStrip).observe(phoneStrip);
 
 const gallery = document.querySelector('.cover-gallery');
 const coverRows = [...gallery.querySelectorAll('.cover-row')];

@@ -441,37 +441,50 @@ body.home-page {
 
 .sync-art,
 .widgets-art {
-  min-height: 365px;
+  display: grid;
+  place-items: center;
+  padding-block: clamp(20px, 3.4vw, 40px);
+}
+
+.feature-devices {
+  position: relative;
+  width: min(90%, 590px);
+  aspect-ratio: 6 / 5;
+}
+
+.widgets-art .feature-devices {
+  width: min(86%, 565px);
+  aspect-ratio: 5 / 4;
 }
 
 .sync-art .mac-frame {
   position: absolute;
-  inset: 12% 7% auto auto;
-  width: 81%;
+  inset: 0 0 auto auto;
+  width: 90%;
 }
 
 .sync-art .tablet-frame {
   position: absolute;
-  inset: auto auto 10% 3%;
-  width: 40%;
+  inset: auto auto 6% 0;
+  width: 44%;
 }
 
 .sync-art .phone-frame {
   position: absolute;
-  inset: auto auto 5% 39%;
-  width: 24%;
+  inset: auto auto 0 40%;
+  width: 27%;
 }
 
 .sync-art .watch-frame {
   position: absolute;
-  inset: auto 8% 10% auto;
-  width: 18%;
+  inset: auto 1% 6% auto;
+  width: 20%;
 }
 
 .widgets-art .mac-frame {
   position: absolute;
-  inset: 17% 8% auto auto;
-  width: 85%;
+  inset: 0 auto auto 0;
+  width: 99%;
 }
 
 .mac-widget-screen {
@@ -497,8 +510,8 @@ body.home-page {
 
 .widgets-art .phone-frame {
   position: absolute;
-  inset: auto 7% 7% auto;
-  width: min(30%, 175px);
+  inset: auto 0 0 auto;
+  width: min(31%, 175px);
 }
 
 .home-downloads {
@@ -775,8 +788,17 @@ body.home-page {
   grid-column: 1 / -1;
 }
 
-.device-platforms .device-column:last-child {
-  grid-column: -2;
+.device-other {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 264px);
+}
+
+.device-other .text-link {
+  max-width: 100%;
+  white-space: normal;
 }
 
 @media (min-width: 720px) {
@@ -790,6 +812,10 @@ body.home-page {
 
   .device-android {
     grid-column: span 3;
+  }
+
+  .device-other {
+    grid-column: span 2;
   }
 }
 
@@ -970,23 +996,8 @@ body.home-page {
     width: min(38%, 180px);
   }
 
-  .sync-art,
-  .widgets-art {
-    min-height: 0;
-    aspect-ratio: 1.43;
-    margin-top: 8px;
-  }
-
-  .sync-art .mac-frame {
-    inset-block-start: 10%;
-  }
-
-  .widgets-art .mac-frame {
-    inset-block-start: 12%;
-  }
-
-  .widgets-art {
-    aspect-ratio: 1.25;
+  .device-other .device-links {
+    font-size: .85rem;
   }
 
   .home-downloads .home-heading,
@@ -1014,7 +1025,6 @@ body.home-page {
 
   .device-column .device-links {
     gap: 0;
-    font-size: .85rem;
   }
 
   .mac-frame {
