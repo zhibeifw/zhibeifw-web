@@ -314,6 +314,14 @@
 
   <script>
     (function () {
+      const root = document.documentElement;
+      document.addEventListener('pointerdown', () => {
+        root.dataset.focusInput = 'pointer';
+      }, { capture: true, passive: true });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Tab') root.dataset.focusInput = 'keyboard';
+      }, true);
+
       const dialog = document.getElementById('platform-dialog');
       if (typeof dialog.showModal !== 'function') return;
 

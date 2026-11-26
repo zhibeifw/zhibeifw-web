@@ -124,6 +124,19 @@ body:has(.platform-dialog[open]) .hero-container {
   filter: blur(4px);
 }
 
+:is(.download-btn, .platform-download[href], .platform-dialog-close) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root[data-focus-input="pointer"] :is(.download-btn, .platform-download[href], .platform-dialog-close):focus {
+  outline: none;
+}
+
+:root[data-focus-input="keyboard"] :is(.download-btn, .platform-download[href], .platform-dialog-close):focus {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 3px;
+}
+
 .platform-dialog {
   position: fixed;
   inset: 0;
