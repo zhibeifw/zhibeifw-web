@@ -759,18 +759,6 @@ body.home-page {
   text-align: center;
 }
 
-.release-pending {
-  display: grid;
-  grid-template-rows: 44px auto;
-  align-items: center;
-  color: var(--home-muted);
-  white-space: nowrap;
-}
-
-.release-pending small {
-  font-size: 0.78em;
-}
-
 .device-platforms,
 .device-android .device-icons {
   display: grid;
