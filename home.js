@@ -13,10 +13,15 @@ const coverRows = [...gallery.querySelectorAll('.cover-row')];
 const coverTracks = [...gallery.querySelectorAll('[data-cover-row]')];
 const touchLayout = window.matchMedia('(hover: none)');
 const coverOrigin = 'https://zbfw.org';
-const coursePage = `https://web.${siteDomain}/#series/`;
+const webPlayerUrl = `https://web.${siteDomain}/`;
+const coursePage = webPlayerUrl + '#series/';
 let galleryVisible = !('IntersectionObserver' in window);
 let selectedCover = null;
 let pendingCovers = null;
+
+for (const link of document.querySelectorAll('[data-web-player]')) {
+  link.href = webPlayerUrl;
+}
 
 function coverUrl(path) {
   return coverOrigin + '/' + path.split('/').map(encodeURIComponent).join('/');
