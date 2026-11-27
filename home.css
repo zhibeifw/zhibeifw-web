@@ -489,6 +489,12 @@ body.home-page {
   --crop-height: 638;
 }
 
+.playback-combined {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
 .mac-frame {
   border: 7px solid #262422;
   border-bottom-width: 11px;
@@ -1085,8 +1091,12 @@ body.home-page {
     justify-content: center;
   }
 
-  .playback-sleep {
+  .playback-crop {
     display: none;
+  }
+
+  .playback-combined {
+    display: block;
   }
 }
 
