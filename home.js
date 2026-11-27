@@ -52,7 +52,7 @@ let selectedCover = null;
 let pendingCovers = null;
 
 for (const link of document.querySelectorAll('[data-web-player]')) {
-  link.href = webPlayerUrl + link.hash;
+  link.href = webPlayerUrl;
 }
 
 function coverUrl(path) {
