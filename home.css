@@ -65,13 +65,15 @@ body.home-page {
 }
 
 .home-hero {
-  padding-top: max(clamp(51px, 6.8vw, 89px), env(safe-area-inset-top));
+  --hero-top: max(clamp(51px, 6.8vw, 89px), env(safe-area-inset-top));
+  --hero-mark-size: clamp(64px, 7vw, 82px);
+  padding-top: var(--hero-top);
   overflow: clip;
 }
 
 .app-mark {
   display: block;
-  width: clamp(64px, 7vw, 82px);
+  width: var(--hero-mark-size);
   height: auto;
   margin: 0 auto 10px;
   border-radius: 22%;
@@ -118,6 +120,73 @@ body.home-page {
 .phone-lineup > .phone-frame {
   width: var(--phone-width);
   position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero {
+    --hero-intro-easing: cubic-bezier(.65, 0, .35, 1);
+    --hero-intro-drop: max(0px, calc(100svh - var(--hero-top) - var(--hero-mark-size) - 30px));
+    --hero-intro-spread: min(200px, 28vw);
+  }
+
+  .home-hero-copy .app-mark {
+    animation: home-hero-mark-in 2s var(--hero-intro-easing) backwards;
+  }
+
+  .home-hero-copy .app-name {
+    animation: home-hero-fade-in .5s var(--hero-intro-easing) 1.5s backwards;
+  }
+
+  .home-hero-copy h1,
+  .home-hero-copy p:not(.app-name) {
+    animation: home-hero-rise 2s var(--hero-intro-easing) backwards;
+  }
+
+  .home-hero-copy .home-button {
+    animation: home-hero-rise 2s var(--hero-intro-easing) backwards,
+      home-hero-fade-in 1s var(--hero-intro-easing) .25s backwards;
+  }
+
+  .phone-lineup > .phone-frame {
+    animation: home-hero-phone-in 2s var(--hero-intro-easing) backwards;
+  }
+
+  .phone-home {
+    --hero-phone-offset: calc(-2 * var(--hero-intro-spread));
+  }
+
+  .phone-categories {
+    --hero-phone-offset: calc(-1 * var(--hero-intro-spread));
+  }
+
+  .phone-library {
+    --hero-phone-offset: var(--hero-intro-spread);
+  }
+
+  .phone-search {
+    --hero-phone-offset: calc(2 * var(--hero-intro-spread));
+  }
+}
+
+@keyframes home-hero-mark-in {
+  from {
+    transform: translateY(max(0px, calc(50svh - var(--hero-top) - var(--hero-mark-size) / 2))) scale(3);
+  }
+}
+
+@keyframes home-hero-rise {
+  from { transform: translateY(var(--hero-intro-drop)); }
+}
+
+@keyframes home-hero-fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes home-hero-phone-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--hero-phone-offset, 0px), var(--hero-intro-drop));
+  }
 }
 
 .phone-frame,
@@ -969,16 +1038,9 @@ body.home-page {
 
 @media (max-width: 775px) {
   .phone-strip {
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .phone-strip::-webkit-scrollbar {
-    display: none;
-  }
-
-  .phone-lineup {
-    padding-inline: max(16px, calc(50vw - var(--phone-width) / 2));
+    display: grid;
+    justify-content: center;
+    overflow: clip;
   }
 
   .feature-card {

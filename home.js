@@ -1,13 +1,3 @@
-const phoneStrip = document.querySelector('.phone-strip');
-const narrowViewport = window.matchMedia('(max-width: 775px)');
-
-function centerPhoneStrip() {
-  phoneStrip.scrollLeft = narrowViewport.matches ? (phoneStrip.scrollWidth - phoneStrip.clientWidth) / 2 : 0;
-}
-
-centerPhoneStrip();
-new ResizeObserver(centerPhoneStrip).observe(phoneStrip);
-
 const gallery = document.querySelector('.cover-gallery');
 const coverRows = [...gallery.querySelectorAll('.cover-row')];
 const coverTracks = [...gallery.querySelectorAll('[data-cover-row]')];
