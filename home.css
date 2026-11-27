@@ -478,14 +478,6 @@ body.home-page {
   color: #182f49;
 }
 
-.feature-download .feature-copy {
-  container-type: inline-size;
-}
-
-.feature-download h2 {
-  font-size: min(var(--feature-title-size), 14cqi);
-}
-
 .feature-playback {
   background: radial-gradient(ellipse at 86% 92%, #7b304b 1%, #4e2345 44%, #271c38 100%);
   color: #fff;
@@ -1099,11 +1091,16 @@ body.home-page {
   }
 
   .feature-copy {
+    container-type: inline-size;
     padding: clamp(24px, 7vw, 48px);
     padding-bottom: 0;
   }
 
-  .feature-card:not(.feature-download) .feature-copy h2 br {
+  .feature-copy h2 {
+    font-size: min(var(--feature-title-size), 11cqi);
+  }
+
+  .feature-copy h2 br {
     display: none;
   }
 
