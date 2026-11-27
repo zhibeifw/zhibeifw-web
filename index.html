@@ -18,6 +18,12 @@
   <script defer src="home.js"></script>
 </head>
 <body class="home-page">
+  <aside class="home-notice" data-notice-src="./site-notice.json" aria-label="官网公告" hidden>
+    <p class="home-width">
+      <span data-notice-message></span>
+      <a class="text-link" data-notice-link hidden><span data-notice-label></span> <span aria-hidden="true">›</span></a>
+    </p>
+  </aside>
   <main>
     <section class="home-hero" aria-labelledby="home-title">
       <div class="home-heading home-hero-copy">
@@ -44,9 +50,13 @@
         <h2 id="catalog-title">从闻思修，入三摩地。</h2>
         <p>从佛学入门到大圆满。这里有持续更新的新课，也有历年的讲课录音。</p>
       </div>
-      <div class="cover-gallery" aria-label="课程封面">
+      <div class="cover-gallery" id="course-cover-gallery" aria-label="课程封面">
         <div class="cover-row"><div class="cover-track" data-cover-row></div></div>
         <div class="cover-row"><div class="cover-track" data-cover-row></div></div>
+      </div>
+      <div class="cover-gallery-controls">
+        <a class="text-link" href="https://web.zhibeifw.com/#categories" data-web-player>收听所有课程 <span aria-hidden="true">›</span></a>
+        <button class="cover-motion-toggle" type="button" aria-label="暂停封面滚动" aria-controls="course-cover-gallery" hidden></button>
       </div>
     </section>
 

@@ -1,16 +1,58 @@
+function noticeLinkUrl(value) {
+  if (typeof value !== 'string' || !value.trim() || value.length > 1000) return null;
+  try {
+    const url = new URL(value, window.location.href);
+    if (url.username || url.password) return null;
+    const sameSiteHttp = url.protocol === 'http:' && url.origin === window.location.origin;
+    return url.protocol === 'https:' || sameSiteHttp ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+async function showSiteNotice() {
+  const banner = document.querySelector('[data-notice-src]');
+  if (!banner) return;
+
+  const notice = await loadHomepageJson(banner.dataset.noticeSrc, 4096, {
+    cache: 'no-store',
+    signal: AbortSignal.timeout(4000),
+  });
+  if (notice?.enabled !== true || typeof notice.message !== 'string') return;
+  const message = notice.message.trim();
+  if (!message || message.length > 180) return;
+
+  banner.querySelector('[data-notice-message]').textContent = message;
+  const label = typeof notice.link?.label === 'string' ? notice.link.label.trim() : '';
+  const url = noticeLinkUrl(notice.link?.url);
+  if (url && label && label.length <= 32) {
+    const link = banner.querySelector('[data-notice-link]');
+    link.href = url.href;
+    link.querySelector('[data-notice-label]').textContent = label;
+    link.hidden = false;
+  }
+  banner.hidden = false;
+}
+
+showSiteNotice().catch(() => {
+  // Keep the banner hidden when its configuration is unavailable.
+});
+
 const gallery = document.querySelector('.cover-gallery');
 const coverRows = [...gallery.querySelectorAll('.cover-row')];
 const coverTracks = [...gallery.querySelectorAll('[data-cover-row]')];
+const coverMotionToggle = document.querySelector('.cover-motion-toggle');
 const touchLayout = window.matchMedia('(hover: none)');
 const coverOrigin = 'https://zbfw.org';
 const webPlayerUrl = `https://web.${siteDomain}/`;
 const coursePage = webPlayerUrl + '#series/';
 let galleryVisible = !('IntersectionObserver' in window);
+let galleryPaused = false;
 let selectedCover = null;
 let pendingCovers = null;
 
 for (const link of document.querySelectorAll('[data-web-player]')) {
-  link.href = webPlayerUrl;
+  link.href = webPlayerUrl + link.hash;
 }
 
 function coverUrl(path) {
@@ -119,8 +161,16 @@ gallery.addEventListener('focusout', event => {
 });
 
 function updateGalleryMotion() {
-  gallery.toggleAttribute('data-moving', galleryVisible && !document.hidden);
+  gallery.toggleAttribute('data-moving', galleryVisible && !document.hidden && !galleryPaused);
 }
+
+coverMotionToggle.addEventListener('click', () => {
+  galleryPaused = !galleryPaused;
+  coverMotionToggle.toggleAttribute('data-paused', galleryPaused);
+  coverMotionToggle.setAttribute('aria-label', galleryPaused ? '继续滚动封面' : '暂停封面滚动');
+  updateGalleryMotion();
+});
+coverMotionToggle.hidden = false;
 
 document.addEventListener('visibilitychange', updateGalleryMotion);
 

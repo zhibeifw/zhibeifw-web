@@ -105,18 +105,22 @@ function selectHomepageCovers(catalog) {
   return chosen.map(({ title, coverPath, id }) => [title, coverPath, id]);
 }
 
-async function loadHomepageCovers(origin) {
-  const limit = 10 * 1024 * 1024;
-  const response = await fetch(origin + '/index.json', { cache: 'no-cache' });
-  if (!response.ok || !response.body || Number(response.headers.get('Content-Length')) > limit) return [];
+async function loadHomepageJson(url, limit, options) {
+  const response = await fetch(url, options);
+  if (!response.ok || !response.body || Number(response.headers.get('Content-Length')) > limit) return null;
 
   let size = 0;
   const body = response.body.pipeThrough(new TransformStream({
     transform(chunk, controller) {
       size += chunk.byteLength;
-      if (size > limit) throw new RangeError('课程目录过大');
+      if (size > limit) throw new RangeError('文件过大');
       controller.enqueue(chunk);
     },
   }));
-  return selectHomepageCovers(await new Response(body).json());
+  return new Response(body).json();
+}
+
+async function loadHomepageCovers(origin) {
+  const catalog = await loadHomepageJson(origin + '/index.json', 10 * 1024 * 1024, { cache: 'no-cache' });
+  return selectHomepageCovers(catalog);
 }
