@@ -462,7 +462,8 @@ body.home-page {
 }
 
 .feature-copy h2 {
-  font-size: clamp(2.25rem, 4.6vw, 4rem);
+  --feature-title-size: clamp(2.25rem, 4.6vw, 4rem);
+  font-size: var(--feature-title-size);
 }
 
 .feature-copy p {
@@ -475,6 +476,14 @@ body.home-page {
 .feature-download {
   background: linear-gradient(130deg, #d9e8fb 0%, #eef5ff 79%);
   color: #182f49;
+}
+
+.feature-download .feature-copy {
+  container-type: inline-size;
+}
+
+.feature-download h2 {
+  font-size: min(var(--feature-title-size), 14cqi);
 }
 
 .feature-playback {
@@ -1094,7 +1103,7 @@ body.home-page {
     padding-bottom: 0;
   }
 
-  .feature-copy h2 br {
+  .feature-card:not(.feature-download) .feature-copy h2 br {
     display: none;
   }
 
