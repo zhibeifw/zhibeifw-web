@@ -1084,6 +1084,10 @@ body.home-page {
     grid-template-columns: minmax(0, 320px);
     justify-content: center;
   }
+
+  .playback-sleep {
+    display: none;
+  }
 }
 
 @media (max-width: 420px) {
